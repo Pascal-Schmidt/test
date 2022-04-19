@@ -14,7 +14,7 @@ library(trelliscopejs)
 ```
 
 ```{r}
-plots_df <- readr::write_csv("data/plots_df.csv")
+plots_df <- readr::read_csv(here::here("data/plots_df.csv"))
 
 ensemble_df <- plots_df %>% 
   dplyr::filter(.key == "prediction", .model_desc %in% c("NBEATS ENSEMBLE", "TFT")) %>% 
@@ -31,7 +31,7 @@ plots_df %>%
     ~ category, nrow = 2, ncol = 2, 
     width = 800, scales = "free",
     as_plotly = TRUE,
-    path = "dashboard"
+    path = "docs"
   )
 ```
 
