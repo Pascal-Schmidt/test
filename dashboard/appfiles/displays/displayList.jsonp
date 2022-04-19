@@ -1,0 +1,12 @@
+__loadDisplayList__09b4afee([
+  {
+    "group": "common",
+    "name": "by_category",
+    "desc": "Forecast Plot",
+    "n": 89,
+    "height": 500,
+    "width": 800,
+    "updated": "2022-04-18 18:41:01",
+    "keySig": "d6ac0146b8801a3dc55ace269030b5a3"
+  }
+])
