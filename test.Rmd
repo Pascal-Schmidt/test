@@ -1,0 +1,37 @@
+---
+title: "Untitled"
+author: "Pascal Schmidt"
+date: "19/04/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(modeltime)
+library(trelliscopejs)
+```
+
+```{r}
+plots_df <- readr::write_csv("data/plots_df.csv")
+
+ensemble_df <- plots_df %>% 
+  dplyr::filter(.key == "prediction", .model_desc %in% c("NBEATS ENSEMBLE", "TFT")) %>% 
+  dplyr::group_by(category, .index, .key) %>% 
+  dplyr::summarise(
+    .value = mean(.value),
+    .model_desc = "ENSEMBLE TFT NBEATS"
+  )
+
+plots_df %>% 
+  dplyr::bind_rows(ensemble_df) %>% 
+  modeltime::plot_modeltime_forecast(.interactive = FALSE) + 
+  facet_trelliscope(
+    ~ category, nrow = 2, ncol = 2, 
+    width = 800, scales = "free",
+    as_plotly = TRUE,
+    path = "dashboard"
+  )
+```
+
